@@ -32,7 +32,7 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
         viewModel.loadProducts()
         return binding.root
     }
@@ -141,19 +141,19 @@ class MenuFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.navigation_settings -> {
-                findNavController().navigate(R.id.navigation_settings)
-            }
-        }
-        return true
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.settings_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when (item.itemId) {
+//            R.id.navigation_settings -> {
+//                findNavController().navigate(R.id.navigation_settings)
+//            }
+//        }
+//        return true
+//    }
+//
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.settings_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

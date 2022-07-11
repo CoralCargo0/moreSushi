@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.id.navigation_menu, R.id.navigation_order
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
