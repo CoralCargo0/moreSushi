@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">SushiApp</string>
+    <string name="title_menu_fragment">Меню</string>
+    <string name="title_order_fragment">Заказ</string>
+    <string name="title_settings_fragment">Настройки</string>
+
+
+    <!--    Settings Fragment-->
+    <string name="title_theme_switcher">Выберите тему приложения</string>
+    <string name="dark_theme">Темная</string>
+    <string name="light_theme">Светлая</string>
+
+    <string name="title_language_chooser">Выберите язык</string>
+    <string-array name="languages">
+        <item name="RUS">Русский</item>
+        <item name="BEL">Беларуская</item>
+        <item name="ENG">English</item>
+    </string-array>
+    <!--   -->
+
+    <!--    Order Fragment-->
+    <string name="title_order">Ваш заказ</string>
+
+    <string name="title_name">Ваше имя</string>
+    <string name="hint_name"> Иван Иванов</string>
+
+    <string name="title_phone_number">Номер на который поступит звонок</string>
+    <string name="hint_phone_number"> +375445566778</string>
+
+    <string name="title_comment">Комментарий к заказу</string>
+    <string name="hint_comment"> Время доставки…</string>
+
+
+    <string name="total_cost_title">Стоимость заказа</string>
+    <string name="total_cost">%.2f руб. </string>
+
+    <string name="submit_button">Подтвердить</string>
+    <!--   -->
+    <string name="loading">Меню загружается, пожалуйста, подождите)</string>
+
+
+    <!--    Templates for order-->
+
+    <string name="product_template">%30s/%.2f * %d = %.2f\n</string>
+    <string name="total_cost_template">%30s/Total cost - %.2f\n</string>
+    <string name="customer_template">%30s\n%30s\n</string>
+    <string name="delimiter_template">------------------------------/-------------------\n</string>
+    <string name="error_menu">Произошла ошибка, попробуйте позже.</string>
+    <!--   -->
+
+
+</resources>

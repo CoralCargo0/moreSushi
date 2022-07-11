@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27897500697",
+    "project_id": "sushiapp-2022",
+    "storage_bucket": "sushiapp-2022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27897500697:android:7511592611a0d16363c688",
+        "android_client_info": {
+          "package_name": "by.trokay.more.sushi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27897500697-qmgde2tl58tq3d101c91pu847nja1pum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRdBbtNZbD0d4e2FlPl3gTmup-QKMikUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27897500697-qmgde2tl58tq3d101c91pu847nja1pum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/small_vertical_margin">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/food_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_horizontal_margin"
+            android:layout_marginEnd="@dimen/small_horizontal_margin"
+            android:maxWidth="180dp"
+            android:maxLines="2"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/decrement_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Биг Мак" />
+
+        <Button
+            android:id="@+id/decrement_amount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/primary_light"
+            android:foreground="@drawable/ic_round_remove_24"
+            android:text=" "
+            app:layout_constraintBottom_toBottomOf="@+id/increment_amount"
+            app:layout_constraintEnd_toStartOf="@+id/amount"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/increment_amount"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/increment_amount"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/primary_light"
+            android:foreground="@drawable/ic_baseline_add_24"
+            android:text=" "
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/amount_counter_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/increment_amount"
+            app:layout_constraintEnd_toStartOf="@+id/increment_amount"
+            app:layout_constraintTop_toTopOf="@+id/increment_amount"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/product_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_horizontal_margin"
+            android:maxLines="4"
+            android:textColor="@color/black"
+
+            app:layout_constraintEnd_toStartOf="@+id/decrement_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/product_title"
+            tools:text="Большой сандвич с двумя рубленными бифштексами из натуральной цельной говядины на специальной булочке, заправленной луком,  двумя кусочками маринованного огурчика, ломтиком сыра чеддер, свежим салатом и специальным соусом." />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/price_text_size"
+
+            app:layout_constraintEnd_toEndOf="@+id/increment_amount"
+            app:layout_constraintStart_toStartOf="@+id/decrement_amount"
+            app:layout_constraintTop_toBottomOf="@+id/increment_amount"
+            tools:text="5.50 BYN" />
+
+        <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_description"
+            app:layout_constraintVertical_bias="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
