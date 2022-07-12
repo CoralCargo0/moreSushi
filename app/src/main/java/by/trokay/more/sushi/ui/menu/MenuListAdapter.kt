@@ -1,17 +1,29 @@
 package by.trokay.more.sushi.ui.menu
 
+import android.content.Context
+import android.content.Intent
+import android.content.res.Resources
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import by.trokay.more.sushi.domain.product.Product
 import by.trokay.more.sushi.R
+import by.trokay.more.sushi.common.Resource
 import by.trokay.more.sushi.databinding.ProductItemBinding
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.google.android.material.snackbar.Snackbar
 
-class MenuListAdapter(private val onItemClicked: (Product) -> Unit) :
+class MenuListAdapter(
+    private val makeToast: (String, Int) -> Unit,
+    private val onItemClicked: (Product) -> Unit
+) :
     ListAdapter<Product, MenuListAdapter.MenuViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
@@ -21,7 +33,8 @@ class MenuListAdapter(private val onItemClicked: (Product) -> Unit) :
                     parent.context
                 )
             ),
-            onItemClicked
+            onItemClicked,
+            makeToast
         )
     }
 
@@ -32,34 +45,47 @@ class MenuListAdapter(private val onItemClicked: (Product) -> Unit) :
 
     class MenuViewHolder(
         private var binding: ProductItemBinding,
-        private val onItemClicked: (Product) -> Unit
+        private val onItemClicked: (Product) -> Unit,
+        private val makeToast: (String, Int) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Product) {
-//            itemView.setOnClickListener {
-//                onItemClicked(item)
-//            }
+            itemView.setOnClickListener {
+                onItemClicked(item)
+            }
             binding.apply {
                 productTitle.text = item.title
-                amount.text = item.amount.toString()
                 productPrice.text = item.price.toString() + " BYN"
-                incrementAmount.setOnClickListener {
-                    if (item.amount < 10) {
-                        item.amount++
-                        amount.text = item.amount.toString()
-                    }
-                }
-                decrementAmount.setOnClickListener {
-                    if (item.amount > 0) {
-                        item.amount--
-                        amount.text = item.amount.toString()
-                    }
+
+                addToCartButton.setOnClickListener {
+                    item.amount++
+//                    val snackbar = Snackbar.make(
+//                        it,
+//                        context.resources.getString(
+//                            R.string.product_added_to_cart_template,
+//                            item.title,
+//                            item.amount,
+//                            item.price
+//                        ),
+//                        Snackbar.LENGTH_SHORT
+//                    )
+//                    val snackbarView = snackbar.view
+//                    val params = snackbarView.layoutParams as FrameLayout.LayoutParams
+//                    params.gravity = Gravity.TOP
+//                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                    snackbarView.layoutParams = params
+//                    snackbarView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                    snackbar.show()
+                    makeToast(
+                        item.title,
+                        item.amount
+                    )
                 }
 
                 productImage.load(item.image) {
                     crossfade(true)
-                    placeholder(R.drawable.progress)
+                    placeholder(R.drawable.placeholder)
                 }
             }
         }

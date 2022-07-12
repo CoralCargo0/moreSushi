@@ -14,9 +14,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="@color/transparent"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/red" />
+        app:tabSelectedTextColor="@color/red"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items"

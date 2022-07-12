@@ -8,7 +8,7 @@
     <dimen name="settings_text_size">20sp</dimen>
     <dimen name="amount_counter_text_size">35sp</dimen>
      <dimen name="price_text_size">25sp</dimen>
-
+    <dimen name="amount_counter_text_size_small">20sp</dimen>
 
 
 </resources>

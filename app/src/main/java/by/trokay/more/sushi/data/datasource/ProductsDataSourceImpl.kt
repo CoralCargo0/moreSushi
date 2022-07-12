@@ -198,6 +198,8 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
         ProductType("Соусы", 8),
         ProductType("Хэппи Мил™", 9)
     )
+
+
     var productsList = mutableListOf<Product>()
     val typess: HashMap<String, Int> = hashMapOf()
 
@@ -249,20 +251,11 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
     }
 
     override fun getTypes(): HashMap<String, Int> {
-
-//        db.collection(typesPath).get()
-//            .addOnSuccessListener { querySnapshot ->
-//                querySnapshot.documents.forEach { v ->
-//                    v.toObject(ProductType::class.java)?.let { typess[it.title] = it.index }
-//                }
-//
-//            }
-//            .addOnFailureListener { e ->
-//                _products.value =
-//                    Resource.Error<List<Product>>(
-//                        e.localizedMessage ?: "An unexpected error occured"
-//                    )
-//            }
         return typess
+    }
+
+    override fun getProduct(id: Int): Product? {
+        productsList.find { it.id == id }?.let { return it }
+        return null
     }
 }

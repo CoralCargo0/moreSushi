@@ -18,4 +18,8 @@ class ProductRepositoryImpl @Inject constructor(
     override fun getProductsTypes(): HashMap<String, Int> {
         return dataSource.getTypes()
     }
+
+    override fun getProduct(id: Int): Product? {
+        return dataSource.getProduct(id)
+    }
 }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_menu_to_navigation_settings"
             app:destination="@id/navigation_settings" />
+        <action
+            android:id="@+id/action_navigation_menu_to_productCardFragment"
+            app:destination="@id/navigation_product_card" />
     </fragment>
 
     <fragment
@@ -26,4 +29,13 @@
         android:name="by.trokay.more.sushi.ui.settings.SettingsFragment"
         android:label="@string/title_settings_fragment"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/navigation_product_card"
+        android:name="by.trokay.more.sushi.ui.card.ProductCardFragment"
+        android:label="ProductCardFragment"
+        tools:layout="@layout/product_card_fragment" >
+        <argument
+            android:name="itemId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

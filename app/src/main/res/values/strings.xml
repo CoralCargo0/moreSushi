@@ -46,7 +46,13 @@
     <string name="customer_template">%30s\n%30s\n</string>
     <string name="delimiter_template">------------------------------/-------------------\n</string>
     <string name="error_menu">Произошла ошибка, попробуйте позже.</string>
+    <string name="add_to_cart_text">В корзину</string>
     <!--   -->
+
+    <string name="product_price_template">%.2f руб за 1 шт</string>
+    <string name="product_price_sushi_template">%.2f руб за 1 порцию(8 шт)</string>
+
+    <string name="product_added_to_cart_template">Добавлено в корзину\n%s(%d шт)</string>
 
 
 </resources>

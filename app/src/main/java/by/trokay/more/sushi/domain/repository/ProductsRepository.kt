@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface ProductsRepository {
     fun getProducts(): Flow<Resource<List<Product>>>
     fun getProductsTypes(): HashMap<String, Int>
+    fun getProduct(id: Int): Product?
 }

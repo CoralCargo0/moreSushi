@@ -59,7 +59,7 @@ class OrderListAdapter(private val onItemClicked: (Product) -> Unit) :
 
                 imageView.load(item.image) {
                     crossfade(true)
-                    placeholder(R.drawable.progress)
+                    placeholder(R.drawable.placeholder)
                 }
             }
         }

@@ -19,12 +19,28 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
-    private var customAdapter = MenuListAdapter {
-        TODO("OnClick fun")
+
+    private val customAdapter by lazy {
+        MenuListAdapter(
+            makeToast = { title, amount ->
+                Toast.makeText(
+                    context,
+                    resources.getString(
+                        R.string.product_added_to_cart_template,
+                        title,
+                        amount
+                    ),
+                    Toast.LENGTH_SHORT
+                ).show()
+            },
+            onItemClicked = { product ->
+                MenuFragmentDirections.actionNavigationMenuToProductCardFragment(product.id).also {
+                    findNavController().navigate(it)
+                }
+            })
     }
 
     val viewModel by activityViewModels<MenuViewModel>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,23 +48,9 @@ class MenuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
-//        setHasOptionsMenu(true)
         viewModel.loadProducts()
         return binding.root
     }
-
-//    val types: HashMap<String, Int> = hashMapOf(
-//        Pair("Всё", 0),
-//        Pair("Боксы", 1),
-//        Pair("Бургеры", 2),
-//        Pair("Роллы", 3),
-//        Pair("Картофель", 4),
-//        Pair("Десерты", 5),
-//        Pair("Напитки", 6),
-//        Pair("Кофе и чай", 7),
-//        Pair("Соусы", 8),
-//        Pair("Хэппи Мил™", 9),
-//    )
 
     var types: HashMap<String, Int> = hashMapOf()
 
@@ -63,7 +65,7 @@ class MenuFragment : Fragment() {
             adapter = customAdapter
         }
 
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenCreated {
             viewModel.state.collect {
                 when {
                     it.isLoading -> {
@@ -101,6 +103,7 @@ class MenuFragment : Fragment() {
 
     private fun bindTabLayoutAndRecycler() {
         types = viewModel.productsTypes
+
         binding.categoryChooser.apply {
             types.toSortedMap(compareBy { types[it] }).forEach { (t, u) ->
                 val tmpTab = newTab().setText(t)

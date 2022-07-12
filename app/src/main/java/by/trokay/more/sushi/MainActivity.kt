@@ -3,6 +3,7 @@ package by.trokay.more.sushi
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -25,6 +26,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         )
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            when (destination.id) {
+//                R.id.productCardFragment -> {
+//                    findViewById<ConstraintLayout>(R.id.action_bar).visibility = ConstraintLayout.GONE
+//                }
+//                else -> {
+//                    findViewById<ConstraintLayout>(R.id.action_bar).visibility = ConstraintLayout.VISIBLE
+//                }
+//            }
+//        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

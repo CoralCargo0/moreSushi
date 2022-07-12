@@ -10,10 +10,10 @@
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="50dp"
         android:background="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="5dp"
         app:layout_constraintVertical_bias="0.0">
 
 
