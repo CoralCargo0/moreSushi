@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/navigation_order"
         android:name="by.trokay.more.sushi.ui.order.OrderFragment"
-        android:label="@string/title_order_fragment"
+        android:label="@string/title_cart_fragment"
         tools:layout="@layout/fragment_order" />
 
     <fragment

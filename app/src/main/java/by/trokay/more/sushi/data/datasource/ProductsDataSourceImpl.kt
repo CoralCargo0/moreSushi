@@ -3,7 +3,7 @@ package by.trokay.more.sushi.data.datasource
 import by.trokay.more.sushi.common.Resource
 import by.trokay.more.sushi.domain.datasource.ProductsDataSource
 import by.trokay.more.sushi.domain.product.Product
-import by.trokay.more.sushi.data.remote.ProductType
+import by.trokay.more.sushi.data.remote.ProductTypeDto
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -187,16 +187,16 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
 //    )
 
     val typesTest = listOf(
-        ProductType("Всё", 0),
-        ProductType("Боксы", 1),
-        ProductType("Бургеры", 2),
-        ProductType("Роллы", 3),
-        ProductType("Картофель", 4),
-        ProductType("Десерты", 5),
-        ProductType("Напитки", 6),
-        ProductType("Кофе и чай", 7),
-        ProductType("Соусы", 8),
-        ProductType("Хэппи Мил™", 9)
+        ProductTypeDto("Всё", 0),
+        ProductTypeDto("Боксы", 1),
+        ProductTypeDto("Бургеры", 2),
+        ProductTypeDto("Роллы", 3),
+        ProductTypeDto("Картофель", 4),
+        ProductTypeDto("Десерты", 5),
+        ProductTypeDto("Напитки", 6),
+        ProductTypeDto("Кофе и чай", 7),
+        ProductTypeDto("Соусы", 8),
+        ProductTypeDto("Хэппи Мил™", 9)
     )
 
 
@@ -219,7 +219,7 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
             db.collection(typesPath).get()
                 .addOnSuccessListener { querySnapshotTypes ->
                     querySnapshotTypes.documents.forEach { v ->
-                        v.toObject(ProductType::class.java)?.let { typess[it.title] = it.index }
+                        v.toObject(ProductTypeDto::class.java)?.let { typess[it.title] = it.index }
                     }
 
                     db.collection(menuPath).get()

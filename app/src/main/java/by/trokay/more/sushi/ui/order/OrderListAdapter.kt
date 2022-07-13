@@ -43,7 +43,7 @@ class OrderListAdapter(private val onItemClicked: (Product) -> Unit) :
                 productPrice.text = item.price.toString() + " BYN"
                 productDescription.text = item.description
                 incrementAmount.setOnClickListener {
-                    if (item.amount < 10) {
+                    if (item.amount < 99) {
                         item.amount++
                         amount.text = item.amount.toString()
                     }

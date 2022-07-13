@@ -1,6 +1,6 @@
 package by.trokay.more.sushi.di
 
-import by.trokay.more.sushi.data.OrderSenderImpl
+import by.trokay.more.sushi.data.OrderSenderHelper
 import by.trokay.more.sushi.data.ProductRepositoryImpl
 import by.trokay.more.sushi.data.datasource.ProductsDataSourceImpl
 import by.trokay.more.sushi.domain.OrderSender
@@ -8,7 +8,6 @@ import by.trokay.more.sushi.domain.datasource.ProductsDataSource
 import by.trokay.more.sushi.domain.repository.ProductsRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -26,5 +25,5 @@ abstract class MainModule {
     abstract fun provideRepo(repo: ProductRepositoryImpl): ProductsRepository
 
     @Binds
-    abstract fun provideOrderSender(sender: OrderSenderImpl): OrderSender
+    abstract fun provideOrderSender(sender: OrderSenderHelper): OrderSender
 }

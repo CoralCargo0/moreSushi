@@ -19,6 +19,7 @@ class MenuFragment : Fragment() {
 
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
+    val viewModel by activityViewModels<MenuViewModel>()
 
     private val customAdapter by lazy {
         MenuListAdapter(
@@ -39,8 +40,6 @@ class MenuFragment : Fragment() {
                 }
             })
     }
-
-    val viewModel by activityViewModels<MenuViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +72,6 @@ class MenuFragment : Fragment() {
                             loadingGroup.visibility = View.VISIBLE
                             viewGroup.visibility = View.INVISIBLE
                         }
-
                     }
                     !it.error.isNullOrBlank() -> {
                         Toast.makeText(
@@ -144,23 +142,8 @@ class MenuFragment : Fragment() {
         }
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.navigation_settings -> {
-//                findNavController().navigate(R.id.navigation_settings)
-//            }
-//        }
-//        return true
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.settings_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

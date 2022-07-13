@@ -1,41 +1,36 @@
 package by.trokay.more.sushi.ui.order
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.trokay.more.sushi.R
+import by.trokay.more.sushi.common.Constants.dateFormatForAPI
+import by.trokay.more.sushi.common.Constants.nameKey
+import by.trokay.more.sushi.common.Constants.personalPrefs
+import by.trokay.more.sushi.common.Constants.phoneKey
 import by.trokay.more.sushi.common.Resource
 import by.trokay.more.sushi.data.remote.OrderDto
 import by.trokay.more.sushi.databinding.FragmentOrderBinding
 import by.trokay.more.sushi.ui.menu.MenuViewModel
-import com.google.firestore.v1.StructuredQuery
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
 class OrderFragment : Fragment() {
 
     private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
-
-    @SuppressLint("SimpleDateFormat")
-    val dateFormatForAPI: DateFormat = SimpleDateFormat("yyyy.MM.dd - hh.mm.ss")
 
     var totalCost = 0.0
     private val customAdapter = OrderListAdapter {
@@ -50,18 +45,12 @@ class OrderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOrderBinding.inflate(inflater, container, false)
-//        lifecycleScope.launchWhenCreated {
-//            viewModel.state.collect {
-//                when {
-//                    it.menu != null -> {
-//                        bindUi()
-//
-//                    }
-//                }
-//            }
-//        }
-        bindUi()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bindUi()
     }
 
     private fun bindUi() {
@@ -74,9 +63,9 @@ class OrderFragment : Fragment() {
         }
 
         val prefs =
-            activity?.getSharedPreferences("personal_data", Context.MODE_PRIVATE)
-        binding.etNameLayout.setText(prefs?.getString("name", ""))
-        binding.etNumberLayout.setText(prefs?.getString("phone", ""))
+            activity?.getSharedPreferences(personalPrefs, Context.MODE_PRIVATE)
+        binding.etNameLayout.setText(prefs?.getString(nameKey, ""))
+        binding.etNumberLayout.setText(prefs?.getString(phoneKey, ""))
 
         binding.button.setOnClickListener {
             if (totalCost > 0) {
@@ -85,19 +74,10 @@ class OrderFragment : Fragment() {
                             .isNotEmpty() && binding.etNumberLayout.text.toString()
                             .startsWith("+375")
                     ) {
-                        var resultString = ""
                         val tmp = OrderDto()
                         totalCost = 0.0
-                        resultString += resources.getString(R.string.delimiter_template)
                         viewModel.state.value.menu?.filter { it.amount > 0 }?.forEach {
                             totalCost += it.amount * it.price
-                            resultString += resources.getString(
-                                R.string.product_template,
-                                it.title,
-                                it.price,
-                                it.amount,
-                                it.amount * it.price
-                            )
                             tmp._1order.add(
                                 resources.getString(
                                     R.string.product_template,
@@ -108,83 +88,109 @@ class OrderFragment : Fragment() {
                                 )
                             )
                         }
-                        resultString += resources.getString(
-                            R.string.total_cost_template,
-                            "",
-                            totalCost
-                        )
-                        tmp._2totalCost = resources.getString(
-                            R.string.total_cost_template,
-                            "",
-                            totalCost
-                        )
+
                         tmp._3clientWishes = binding.etCommentLayout.text.toString()
                         tmp._4name = binding.etNameLayout.text.toString()
                         tmp._5phone = binding.etNumberLayout.text.toString()
                         tmp._6time = dateFormatForAPI.format(Calendar.getInstance().time)
-                        resultString += resources.getString(R.string.delimiter_template)
-                        resultString += resources.getString(
-                            R.string.customer_template,
-                            binding.etNameLayout.text,
-                            binding.etNumberLayout.text
-                        )
-                        resultString += resources.getString(R.string.delimiter_template)
-                        resultString += binding.etCommentLayout.text
-                        resultString += resources.getString(R.string.delimiter_template)
-                        println(resultString)
+
+//                        var resultString = ""
+//                        resultString += resources.getString(R.string.delimiter_template)
+//                        viewModel.state.value.menu?.filter { it.amount > 0 }?.forEach {
+//                            totalCost += it.amount * it.price
+//                                resultString += resources.getString(
+//                                R.string.product_template,
+//                                it.title,
+//                                it.price,
+//                                it.amount,
+//                                it.amount * it.price
+//                            )
+//                        }
+//                        resultString += resources.getString(
+//                            R.string.total_cost_template,
+//                            "",
+//                            totalCost
+//                        )
+//                        tmp._2totalCost = resources.getString(
+//                            R.string.total_cost_template,
+//                            "",
+//                            totalCost
+//                        )
+//                        resultString += resources.getString(R.string.delimiter_template)
+//                        resultString += resources.getString(
+//                            R.string.customer_template,
+//                            binding.etNameLayout.text,
+//                            binding.etNumberLayout.text
+//                        )
+//                        resultString += resources.getString(R.string.delimiter_template)
+//                        resultString += binding.etCommentLayout.text
+//                        resultString += resources.getString(R.string.delimiter_template)
+//                        println(resultString)
+
 
                         viewModel.sendOrder(tmp).onEach { resource ->
                             when (resource) {
                                 is Resource.Loading -> {
                                     activity?.runOnUiThread {
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Loading!",
-                                            Toast.LENGTH_LONG
+                                        Snackbar.make(
+                                            it,
+                                            getString(R.string.orger_loading),
+                                            Snackbar.LENGTH_SHORT
                                         ).show()
                                     }
                                 }
                                 is Resource.Success -> {
                                     activity?.runOnUiThread {
-                                        Toast.makeText(requireContext(), "NICE!", Toast.LENGTH_LONG)
-                                            .show()
                                         viewModel.state.value.menu?.forEach {
                                             it.amount = 0
                                         }
+
+                                        Snackbar.make(
+                                            it,
+                                            getString(R.string.orger_sended),
+                                            Snackbar.LENGTH_SHORT
+                                        ).show()
                                         calculateAmountAndPrint()
                                     }
                                 }
                                 is Resource.Error -> {
                                     activity?.runOnUiThread {
-                                        Toast.makeText(requireContext(), "BAD!", Toast.LENGTH_LONG)
-                                            .show()
+                                        Snackbar.make(
+                                            it,
+                                            getString(R.string.error_sending_order),
+                                            Snackbar.LENGTH_SHORT
+                                        ).show()
                                     }
                                 }
 
                             }
                         }.launchIn(CoroutineScope(Dispatchers.IO))
                         val prefs =
-                            activity?.getSharedPreferences("personal_data", Context.MODE_PRIVATE)
+                            activity?.getSharedPreferences(personalPrefs, Context.MODE_PRIVATE)
                                 ?.edit()
-                        prefs?.putString("name", binding.etNameLayout.text.toString())
-                        prefs?.putString("phone", binding.etNumberLayout.text.toString())
+                        prefs?.putString(nameKey, binding.etNameLayout.text.toString())
+                        prefs?.putString(phoneKey, binding.etNumberLayout.text.toString())
 
                         prefs?.apply()
                     } else {
-                        binding.etNumberLayout.error = "Введите номер телефона"
+                        binding.etNumberLayout.error = getString(R.string.enter_phone)
                         Toast.makeText(
                             requireContext(),
-                            "Введите номер телефона",
+                            getString(R.string.enter_phone),
                             Toast.LENGTH_LONG
                         )
                             .show()
                     }
                 } else {
-                    binding.etNameLayout.error = "Введите имя"
-                    Toast.makeText(requireContext(), "Введите имя", Toast.LENGTH_LONG).show()
+                    binding.etNameLayout.error = getString(R.string.enter_name)
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.enter_name),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
-                Toast.makeText(context, "Вы не выбрали ни одного продукта", Toast.LENGTH_LONG)
+                Toast.makeText(context, getString(R.string.ypu_have_no_products), Toast.LENGTH_LONG)
                     .show()
             }
         }
@@ -192,9 +198,16 @@ class OrderFragment : Fragment() {
 
     private fun calculateAmountAndPrint() {
         totalCost = 0.0
+
         viewModel.state.value.menu?.filter { it.amount > 0 }?.forEach {
             totalCost += it.amount * it.price
         }
+
+        if (totalCost == 0.0) {
+            binding.mainViewGroup.visibility = View.GONE
+            binding.defaultViewGroup.visibility = View.VISIBLE
+        }
+
         binding.totalCost.text = resources.getString(R.string.total_cost, totalCost)
         customAdapter.submitList(viewModel.state.value.menu?.filter { it.amount > 0 })
     }
@@ -204,3 +217,22 @@ class OrderFragment : Fragment() {
         _binding = null
     }
 }
+
+
+//                    val snackbar = Snackbar.make(
+//                        it,
+//                        context.resources.getString(
+//                            R.string.product_added_to_cart_template,
+//                            item.title,
+//                            item.amount,
+//                            item.price
+//                        ),
+//                        Snackbar.LENGTH_SHORT
+//                    )
+//                    val snackbarView = snackbar.view
+//                    val params = snackbarView.layoutParams as FrameLayout.LayoutParams
+//                    params.gravity = Gravity.TOP
+//                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                    snackbarView.layoutParams = params
+//                    snackbarView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                    snackbar.show()

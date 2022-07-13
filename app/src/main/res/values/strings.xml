@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SushiApp</string>
     <string name="title_menu_fragment">Меню</string>
-    <string name="title_order_fragment">Заказ</string>
+    <string name="title_cart_fragment">Корзина</string>
     <string name="title_settings_fragment">Настройки</string>
 
 
@@ -19,16 +19,16 @@
     <!--   -->
 
     <!--    Order Fragment-->
-    <string name="title_order">Ваш заказ</string>
+    <string name="title_cart">Корзина</string>
 
     <string name="title_name">Ваше имя</string>
-    <string name="hint_name"> Иван Иванов</string>
+    <string name="hint_name">Иван Иванов</string>
 
     <string name="title_phone_number">Номер на который поступит звонок</string>
-    <string name="hint_phone_number"> +375445566778</string>
+    <string name="hint_phone_number">+375445566778</string>
 
     <string name="title_comment">Комментарий к заказу</string>
-    <string name="hint_comment"> Время доставки…</string>
+    <string name="hint_comment">Оставьте Ваше сообщение</string>
 
 
     <string name="total_cost_title">Стоимость заказа</string>
@@ -53,6 +53,13 @@
     <string name="product_price_sushi_template">%.2f руб за 1 порцию(8 шт)</string>
 
     <string name="product_added_to_cart_template">Добавлено в корзину\n%s(%d шт)</string>
+    <string name="empty_cart_text">Корзина пуста</string>
+    <string name="enter_phone">Введите номер телефона</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="ypu_have_no_products">Вы не выбрали ни одного продукта</string>
+    <string name="orger_sended">Заказ отправлен</string>
+    <string name="error_sending_order">Ошибка отправки, повторите позже...</string>
+    <string name="orger_loading">Заказ отправляется!</string>
 
 
 </resources>

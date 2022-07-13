@@ -1,5 +1,6 @@
 package by.trokay.more.sushi.data
 
+import by.trokay.more.sushi.common.Constants.ordersPath
 import by.trokay.more.sushi.common.Resource
 import by.trokay.more.sushi.data.remote.OrderDto
 import by.trokay.more.sushi.domain.OrderSender
@@ -9,9 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
-class OrderSenderImpl @Inject constructor() : OrderSender {
+class OrderSenderHelper @Inject constructor() : OrderSender {
 
-    private val ordersPath = "orders"
     var db = FirebaseFirestore.getInstance()
     private val _state =
         MutableStateFlow<Resource<Boolean>>(Resource.Loading<Boolean>())

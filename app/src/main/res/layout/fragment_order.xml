@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.order.OrderFragment">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/main_view_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="button, items, et_comment_layout, et_name_layout, et_number_layout, title_name, title_comment, title_phone_number, total_cost, total_cost_title"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/default_view_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="empty_cart_iv, empty_cart_tv"
+        tools:visibility="gone" />
+
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -45,8 +61,6 @@
         android:layout_marginStart="@dimen/small_horizontal_margin"
         android:layout_marginEnd="@dimen/small_horizontal_margin"
         android:layout_marginBottom="@dimen/small_vertical_margin"
-        android:layout_weight="1"
-        android:ems="10"
         android:hint="@string/hint_name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/title_phone_number"
@@ -70,16 +84,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_horizontal_margin"
         android:layout_marginBottom="@dimen/vertical_margin"
-        android:layout_weight="1"
         android:hint="@string/hint_phone_number"
         android:inputType="phone"
         android:maxLength="13"
         android:textColor="@color/black"
-        android:textColorHint="@color/secondary_light"
         app:layout_constraintBottom_toTopOf="@id/title_comment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
@@ -97,16 +108,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_horizontal_margin"
-        android:layout_weight="1"
-        android:gravity="start|top"
         android:hint="@string/hint_comment"
         android:inputType="textMultiLine"
         android:textColor="@color/black"
-        android:textColorHint="@color/secondary_light"
         app:layout_constraintBottom_toTopOf="@+id/divider3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/divider3"
@@ -139,5 +146,38 @@
         app:layout_constraintStart_toEndOf="@+id/total_cost_title"
         app:layout_constraintTop_toBottomOf="@+id/divider3"
         tools:text="12.0 руб." />
+
+    <View
+        android:id="@+id/divider7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@+id/items"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <ImageView
+        android:id="@+id/empty_cart_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/no_products"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/empty_cart_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/vertical_margin"
+        android:fontFamily="@font/tangak"
+        android:text="@string/empty_cart_text"
+        android:textColor="@color/text_color_black"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="@+id/empty_cart_iv"
+        app:layout_constraintStart_toStartOf="@+id/empty_cart_iv"
+        app:layout_constraintTop_toBottomOf="@+id/empty_cart_iv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
