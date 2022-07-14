@@ -200,6 +200,140 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
     )
 
 
+    val qwe = listOf(
+        Product(
+            19,
+            "Донер Шримп",
+            "400 гр",
+            listOf(
+                "Пекинская капуста",
+                "креветка в темпуре",
+                "фирменный соус",
+                "соус бургер",
+                "ананасы"
+            ),
+            12.0,
+            "mcdonalds.png",
+            3
+        ),
+        Product(
+            20,
+            "Ролл-Дог",
+            "420 гр",
+            listOf(
+                "Рис",
+                "нори",
+                "листья салата",
+                "чеддер",
+                "спайси",
+                "творожный сыр",
+                "томаты",
+                "манго",
+                "креветка в темпуре",
+                "унаги",
+                "болгарский перец"
+            ),
+            14.5,
+            "mcdonalds.png",
+            3
+        ),
+        Product(
+            21,
+            "Сет Жара",
+            "1300 гр",
+            listOf(
+                "Лосось",
+                "манго",
+                "листья салата",
+                "креветка",
+                "укроп",
+                "огурец",
+                "дайкон",
+                "тунец",
+                "чука",
+                "снежный краб"
+            ),
+            51.0,
+            "mcdonalds.png",
+            5
+        ),
+        Product(
+            22,
+            "Пицца Жара",
+            "500 гр",
+            listOf(
+                "Моцарелла",
+                "бекон",
+                "огурцы соленные",
+                "укроп",
+                "лук синий",
+                "чеддер",
+                "соус кунжутно-ореховый",
+                "пепперони",
+                "свинина"
+            ),
+            18.5,
+            "mcdonalds.png",
+            4
+        ),
+        Product(
+            23,
+            "Пицца Июнь",
+            "1250 гр",
+            listOf(
+                "Охотничьи колбаски",
+                "курица",
+                "сыр моцарелла",
+                "соленные огурцы",
+                "помидоры",
+                "шпинат",
+                "цукини",
+                "соус горчичный",
+                "соус бургер",
+                "лук маринованный"
+            ),
+            31.0,
+            "mcdonalds.png",
+            4
+        ),
+        Product(
+            24,
+            "Чикен Чиз",
+            "290 гр",
+            listOf(
+                "Нори",
+                "рис",
+                "соус чесночный",
+                "сыр творожный",
+                "огурец",
+                "сыр чеддер",
+                "листья салата",
+                "курица",
+                "соус Терияки"
+            ),
+            12.0,
+            "mcdonalds.png",
+            1
+        ),
+        Product(
+            25,
+            "Гранд Маки",
+            "250 гр",
+            listOf(
+                "Нори",
+                "лосось",
+                "манго",
+                "чука",
+                "огурец",
+                "сыр творожный",
+                "чесночный соус"
+            ),
+            14.50,
+            "mcdonalds.png",
+            1
+        )
+    )
+
     var productsList = mutableListOf<Product>()
     val typess: HashMap<String, Int> = hashMapOf()
 
@@ -208,7 +342,7 @@ class ProductsDataSourceImpl @Inject constructor() : ProductsDataSource {
     var products: StateFlow<Resource<List<Product>>> = _products
 
     override fun getProducts(): Flow<Resource<List<Product>>> {
-//        testList.forEach{
+//        qwe.forEach{
 //            db.collection(menuPath).document(it.title).set(it)
 //        }
 //        typesTest.forEach {

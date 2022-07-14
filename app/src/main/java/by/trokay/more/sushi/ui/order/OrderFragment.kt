@@ -88,11 +88,17 @@ class OrderFragment : Fragment() {
                                 )
                             )
                         }
-
+                        tmp._2totalCost = resources.getString(
+                            R.string.total_cost_template,
+                            "",
+                            totalCost
+                        )
                         tmp._3clientWishes = binding.etCommentLayout.text.toString()
                         tmp._4name = binding.etNameLayout.text.toString()
                         tmp._5phone = binding.etNumberLayout.text.toString()
                         tmp._6time = dateFormatForAPI.format(Calendar.getInstance().time)
+
+
 
 //                        var resultString = ""
 //                        resultString += resources.getString(R.string.delimiter_template)
@@ -107,11 +113,6 @@ class OrderFragment : Fragment() {
 //                            )
 //                        }
 //                        resultString += resources.getString(
-//                            R.string.total_cost_template,
-//                            "",
-//                            totalCost
-//                        )
-//                        tmp._2totalCost = resources.getString(
 //                            R.string.total_cost_template,
 //                            "",
 //                            totalCost

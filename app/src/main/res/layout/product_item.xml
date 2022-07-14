@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/vertical_margin"
             android:maxLines="2"
-            android:text="Супержирный бургер с говядиной"
+            android:lines="2"
+            tools:text="Бургер с говядиной"
             android:textAlignment="center"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,21 +47,24 @@
             android:id="@+id/add_to_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="@string/add_to_cart_text"
             android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/product_title"
-            app:layout_constraintTop_toBottomOf="@+id/product_price" />
+            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/product_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/add_to_cart_button"
             app:layout_constraintEnd_toEndOf="@+id/product_title"
             app:layout_constraintStart_toStartOf="@+id/product_title"
             app:layout_constraintTop_toBottomOf="@+id/product_title"
+            app:layout_constraintVertical_bias="0.5"
             tools:text="5.5 RUB" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
