@@ -9,7 +9,9 @@ object Constants {
     const val nameKey = "name"
     const val phoneKey = "phone"
 
-    const val ordersPath = "orders"
+    const val ordersPath = "qwerty"
+    const val menuPath = "menu"
+    const val typesPath = "types"
 
     @SuppressLint("SimpleDateFormat")
     val dateFormatForAPI: DateFormat = SimpleDateFormat("yyyy.MM.dd - hh.mm.ss")

@@ -3,10 +3,12 @@ package by.trokay.more.sushi.ui.order
 import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +34,10 @@ class OrderFragment : Fragment() {
     private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
 
+    private val prefs by lazy {
+        activity?.getSharedPreferences(personalPrefs, Context.MODE_PRIVATE)
+    }
+
     var totalCost = 0.0
     private val customAdapter = OrderListAdapter {
         calculateAmountAndPrint()
@@ -42,7 +48,7 @@ class OrderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentOrderBinding.inflate(inflater, container, false)
         return binding.root
@@ -62,8 +68,7 @@ class OrderFragment : Fragment() {
             adapter = customAdapter
         }
 
-        val prefs =
-            activity?.getSharedPreferences(personalPrefs, Context.MODE_PRIVATE)
+
         binding.etNameLayout.setText(prefs?.getString(nameKey, ""))
         binding.etNumberLayout.setText(prefs?.getString(phoneKey, ""))
 
@@ -98,37 +103,7 @@ class OrderFragment : Fragment() {
                         tmp._5phone = binding.etNumberLayout.text.toString()
                         tmp._6time = dateFormatForAPI.format(Calendar.getInstance().time)
 
-
-
-//                        var resultString = ""
-//                        resultString += resources.getString(R.string.delimiter_template)
-//                        viewModel.state.value.menu?.filter { it.amount > 0 }?.forEach {
-//                            totalCost += it.amount * it.price
-//                                resultString += resources.getString(
-//                                R.string.product_template,
-//                                it.title,
-//                                it.price,
-//                                it.amount,
-//                                it.amount * it.price
-//                            )
-//                        }
-//                        resultString += resources.getString(
-//                            R.string.total_cost_template,
-//                            "",
-//                            totalCost
-//                        )
-//                        resultString += resources.getString(R.string.delimiter_template)
-//                        resultString += resources.getString(
-//                            R.string.customer_template,
-//                            binding.etNameLayout.text,
-//                            binding.etNumberLayout.text
-//                        )
-//                        resultString += resources.getString(R.string.delimiter_template)
-//                        resultString += binding.etCommentLayout.text
-//                        resultString += resources.getString(R.string.delimiter_template)
-//                        println(resultString)
-
-
+                        Log.i("OrderFragment", "tmp: $tmp")
                         viewModel.sendOrder(tmp).onEach { resource ->
                             when (resource) {
                                 is Resource.Loading -> {
@@ -166,13 +141,12 @@ class OrderFragment : Fragment() {
 
                             }
                         }.launchIn(CoroutineScope(Dispatchers.IO))
-                        val prefs =
-                            activity?.getSharedPreferences(personalPrefs, Context.MODE_PRIVATE)
-                                ?.edit()
-                        prefs?.putString(nameKey, binding.etNameLayout.text.toString())
-                        prefs?.putString(phoneKey, binding.etNumberLayout.text.toString())
 
-                        prefs?.apply()
+                        prefs?.edit {
+                            putString(nameKey, binding.etNameLayout.text.toString())
+                            putString(phoneKey, binding.etNumberLayout.text.toString())
+                            apply()
+                        }
                     } else {
                         binding.etNumberLayout.error = getString(R.string.enter_phone)
                         Toast.makeText(
@@ -218,22 +192,3 @@ class OrderFragment : Fragment() {
         _binding = null
     }
 }
-
-
-//                    val snackbar = Snackbar.make(
-//                        it,
-//                        context.resources.getString(
-//                            R.string.product_added_to_cart_template,
-//                            item.title,
-//                            item.amount,
-//                            item.price
-//                        ),
-//                        Snackbar.LENGTH_SHORT
-//                    )
-//                    val snackbarView = snackbar.view
-//                    val params = snackbarView.layoutParams as FrameLayout.LayoutParams
-//                    params.gravity = Gravity.TOP
-//                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
-//                    snackbarView.layoutParams = params
-//                    snackbarView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-//                    snackbar.show()

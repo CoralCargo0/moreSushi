@@ -27,7 +27,6 @@ class MenuViewModel @Inject constructor(
 
     fun loadProducts() {
         repository.getProducts().onEach { result ->
-            Log.i("MY_TAG_TEST", "onEach")
             when (result) {
                 is Resource.Success -> {
                     productsTypes = repository.getProductsTypes()

@@ -24,18 +24,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.id.navigation_menu, R.id.navigation_order
             )
         )
-        //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                R.id.productCardFragment -> {
-//                    findViewById<ConstraintLayout>(R.id.action_bar).visibility = ConstraintLayout.GONE
-//                }
-//                else -> {
-//                    findViewById<ConstraintLayout>(R.id.action_bar).visibility = ConstraintLayout.VISIBLE
-//                }
-//            }
-//        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
